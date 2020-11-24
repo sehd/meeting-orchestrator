@@ -1,5 +1,6 @@
 import Discord from 'discord.js';
-import { Router } from './services/route';
+import Router from './services/route';
+import config from './config.json'
 
 const client = new Discord.Client();
 const prefix = '!'
@@ -16,4 +17,4 @@ client.once('ready', () => {
     console.log('Bot online')
 })
 
-client.login('NzgwMzc0NTIzNTg0NDQ2NDg2.X7uKaQ.zVQuqwz3H_eiER5Avut-Ry_mG64')
+client.login(config.token)

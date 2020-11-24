@@ -1,7 +1,7 @@
 import Discord from 'discord.js';
-import { BaseCommand } from './base_command'
+import BaseCommand from './base_command'
 
-export class StartCommand extends BaseCommand {
+export default class StartCommand extends BaseCommand {
 
     name = 'start';
     description = 'join voice channel and start the meeting';

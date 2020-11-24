@@ -1,8 +1,8 @@
 import Discord from 'discord.js';
-import { BaseCommand } from '../commands/base_command';
-import { StartCommand } from '../commands/start'
+import BaseCommand from '../commands/base_command';
+import StartCommand from '../commands/start'
 
-export class Router {
+export default class Router {
     private commands: Map<string, BaseCommand>
     constructor() {
         this.commands = new Map<string, BaseCommand>();
