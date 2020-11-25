@@ -39,12 +39,12 @@ export default class Meeting {
                 this.onRemind(this);
                 this.t2 = setTimeout(() => {
                     this.onDue(this);
-                }, this.reminder);
-            }, this.duration - this.reminder);
+                }, this.reminder * 1000);
+            }, (this.duration - this.reminder) * 1000);
         } else {
             this.t1 = setTimeout(() => {
                 this.onDue(this);
-            }, this.duration);
+            }, this.duration * 1000);
         }
     }
 

@@ -16,7 +16,7 @@ export default class AddCommand extends BaseCommand {
     }
 
     async execute(message: Discord.Message, args: Array<string>): Promise<void> {
-        var meetings = this.guilds.get(message.guild!.id)
+        const meetings = this.guilds.get(message.guild!.id)
         if (meetings === undefined) {
             message.reply("Please connect the orchestrator");
             message.react('👎')
