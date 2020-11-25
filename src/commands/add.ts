@@ -15,29 +15,38 @@ export default class AddCommand extends BaseCommand {
         this.guilds = guilds;
     }
 
-    execute(message: Discord.Message, args: Array<string>): void {
+    async execute(message: Discord.Message, args: Array<string>): Promise<void> {
         var meetings = this.guilds.get(message.guild!.id)
         if (meetings === undefined) {
-            message.channel.send("Please start the orchestrator");
+            message.reply("Please connect the orchestrator");
+            message.react('👎')
             return;
         }
 
-        if (args.length < 1)
-            message.channel.send("No parameters specified");
+        if (args.length < 1) {
+            message.reply("No parameters specified");
+            message.react('👎')
+            return;
+        }
 
         for (const arg of args) {
             const meeting = this.parseItem(arg);
-            if (typeof meeting === "string")
-                message.channel.send(meeting)
+            if (typeof meeting === "string") {
+                message.reply(meeting)
+                message.react('👎')
+            }
             else {
                 try {
                     meetings.add(meeting);
-                    message.channel.send(`${meeting.name} added.`)
+                    message.react('👍')
                 } catch (error) {
-                    if (error instanceof Error)
-                        message.channel.send(error.message);
+                    if (error instanceof Error) {
+                        message.reply(error.message);
+                        message.react('👎')
+                    }
                     else
-                        message.channel.send("Unknown error occurred")
+                        message.reply("Unknown error occurred")
+                    message.react('👎')
                 }
             }
         }
