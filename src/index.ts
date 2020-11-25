@@ -1,5 +1,19 @@
 import Discord from 'discord.js';
 import Router from './services/route';
+import Express from 'express'
+
+//Start web
+setTimeout(() => {
+    const app = Express();
+    app.get("/", (_req, res,) => {
+        res.json(["All is well."]);
+    });
+    app.listen(process.env.PORT ?? 5000, () => {
+        console.log(`Server running on port ${process.env.PORT ?? 5000}`);
+    });
+}, 2000);
+
+//Start bot
 
 const client = new Discord.Client();
 const prefix = '!'
