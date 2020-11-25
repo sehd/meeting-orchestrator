@@ -11,7 +11,8 @@ export default class Meetings {
             throw new Error("No connection to start meeting");
 
         this.connection = connection;
-        connection.play('assets/dt.mp3')
+        const dispatcher = connection.play('./assets/dt.mp3')
+        dispatcher.on("error", err => console.log(err))
     }
 
     add(meeting: Meeting): void {
