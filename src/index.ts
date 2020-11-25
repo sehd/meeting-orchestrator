@@ -1,6 +1,5 @@
 import Discord from 'discord.js';
 import Router from './services/route';
-import config from './config.json'
 
 const client = new Discord.Client();
 const prefix = '!'
