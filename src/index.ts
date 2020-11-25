@@ -17,4 +17,4 @@ client.once('ready', () => {
     console.log('Bot online')
 })
 
-client.login(config.token)
+client.login(process.env.DISCORD_TOKEN)
