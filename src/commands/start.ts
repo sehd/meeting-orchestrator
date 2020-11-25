@@ -31,6 +31,8 @@ export default class StartCommand extends BaseCommand {
             return;
         }
 
+        await meetings.playCountdown();
+
         while (meeting !== undefined) {
             await this.runMeeting(meeting, message);
             meeting = meetings.next();

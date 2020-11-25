@@ -1,4 +1,4 @@
-import Discord, { MessageType } from "discord.js";
+import Discord, { MessageType, Util } from "discord.js";
 import Meeting from "../models/meeting";
 
 export default class Meetings {
@@ -33,6 +33,18 @@ export default class Meetings {
         this.meetings[0].stop();
         this.meetings = this.meetings.slice(1);
         return this.first();
+    }
+
+    playCountdown(): Promise<void> {
+        return new Promise((resolve, reject) => {
+            try {
+                const dispatcher = this.connection.play('assets/countdown.mp3')
+                dispatcher.on("finish", () => resolve())
+                dispatcher.on("error", (err) => reject(err))
+            } catch (error) {
+                console.log(`Couldn't play sound ${error}`)
+            }
+        })
     }
 
     private onRemind(meeting: Meeting): void {
