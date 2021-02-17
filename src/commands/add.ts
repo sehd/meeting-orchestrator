@@ -29,8 +29,34 @@ export default class AddCommand extends BaseCommand {
             return;
         }
 
+        var requestedMeetings = Array<Meeting | string>()
         for (const arg of args) {
-            const meeting = this.parseItem(arg);
+            if (arg.startsWith('(')) {
+                const parts = arg.split('*');
+                if (parts.length != 2) {
+                    requestedMeetings.push("Invalid Format");
+                    continue;
+                }
+                const actualArg = parts[0];
+                const times = parseInt(parts[1]);
+                if (isNaN(times)) {
+                    requestedMeetings.push("Times must be a number");
+                    continue;
+                }
+                for (let i = 0; i < times; i++) {
+                    const meeting = this.parseItem(actualArg);
+                    if (typeof meeting !== "string") {
+                        meeting.name += `_${(i + 1)}`;
+                    }
+                    requestedMeetings.push(meeting);
+                }
+            } else {
+                const meeting = this.parseItem(arg);
+                requestedMeetings.push(meeting)
+            }
+        }
+
+        for (const meeting of requestedMeetings) {
             if (typeof meeting === "string") {
                 message.reply(meeting)
                 message.react('👎')
