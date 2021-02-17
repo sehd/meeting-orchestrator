@@ -45,7 +45,8 @@ export default class StartCommand extends BaseCommand {
         meeting.start();
         const startTime = Date.now();
         const bot_message = await message.channel.send(`${meeting.name} started at ${new Date(startTime).toTimeString().slice(0, 8)}`)
-        const collected = await bot_message.awaitReactions(_ => true, { max: 1 });
+        bot_message.react('✅');
+        const collected = await bot_message.awaitReactions(_ => true, { max: 2 });
         const duration = Date.now() - startTime;
         const users = await collected.first()?.users.fetch({ limit: 1 });
         bot_message.channel.send(`${users?.first()?.username} done this in ${this.durationToTimeString(duration)}`)

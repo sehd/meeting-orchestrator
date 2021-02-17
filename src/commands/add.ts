@@ -81,6 +81,6 @@ export default class AddCommand extends BaseCommand {
             reminderRingtone = parts[4]
 
         return new Meeting(name, duration, reminder,
-            reminderRingtone ?? 'tindeck', ringtone ?? 'horn')
+            reminderRingtone ?? 'ding', ringtone ?? 'seatbelt')
     }
 }

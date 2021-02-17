@@ -1,7 +1,7 @@
 import Discord from 'discord.js';
 import Router from './services/route';
 import Express from 'express';
-import http from 'http';
+import https from 'https';
 
 function startWeb() {
     setTimeout(() => {
@@ -48,7 +48,7 @@ function startBot() {
 
 function callMyself() {
     var str = ''
-    http.get('https://meeting-orchestrator.herokuapp.com/', (res) => {
+    https.get('https://meeting-orchestrator.herokuapp.com/', (res) => {
         res.on('data', (chunk) => {
             str += chunk;
         });
